@@ -1,4 +1,4 @@
-package nz.co.swiftlymobile.rndemo;
+package nz.co.realestate.reconzmockup;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
@@ -13,7 +13,7 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "rndemo";
+    return "reconz-mockup";
   }
 
   @Override

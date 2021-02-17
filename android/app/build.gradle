@@ -130,12 +130,15 @@ android {
     }
 
     defaultConfig {
-        applicationId "nz.co.swiftlymobile.rndemo"
+        applicationId "nz.co.realestate.reconzmockup"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        missingDimensionStrategy 'react-native-camera', 'general'
+        multiDexEnabled true
     }
+    
     splits {
         abi {
             reset()

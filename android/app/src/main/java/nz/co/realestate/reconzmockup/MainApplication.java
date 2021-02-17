@@ -1,4 +1,4 @@
-package nz.co.swiftlymobile.rndemo;
+package nz.co.realestate.reconzmockup;
 
 import android.app.Application;
 import android.content.Context;
