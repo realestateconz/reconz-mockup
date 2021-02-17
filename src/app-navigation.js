@@ -2,60 +2,51 @@ import React from 'react';
 import { createAppContainer } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { Icon } from 'react-native-elements';
-import SimpleAnimationScreen from './screens/simple-animation-screen';
-import ChuckNorrisScreen from './screens/chuck-norris-screen';
-import TicTacToeScreen from './screens/tic-tac-toe-screen';
-import NiceFormScreen from './screens/nice-form-screen';
-import MapScreen from './screens/map-screen';
-import CameraScreen from './screens/camera-screen';
+import HomeScreen from './screens/home-screen';
+import SearchScreen from './screens/search-screen';
+import SavedScreen from './screens/saved-screen';
+import ProfileScreen from './screens/profile-screen';
+
 
 
 const TabNavigator = createBottomTabNavigator({
-  'Animation': {
-    screen: SimpleAnimationScreen,
+  'For you': {
+    screen: HomeScreen,
     navigationOptions: {
       tabBarIcon: ({ tintColor }) => (
-        <Icon name="movie-open" color={tintColor} type="material-community"/>
+        <Icon name="home" color={tintColor} type="feather"/>
       )
     }
   },
-  'Chuck Norris': {
-    screen: ChuckNorrisScreen,
+  'Search': {
+    screen: SearchScreen,
     navigationOptions: {
       tabBarIcon: ({ tintColor }) => (
-        <Icon name="api" color={tintColor} type="material-community"/>
+        <Icon name="search" color={tintColor} type="feather"/>
       )
     }
   },
-  'Tic Tac Toe': {
-    screen: TicTacToeScreen,
+  'Saved': {
+    screen: SavedScreen,
     navigationOptions: {
       tabBarIcon: ({ tintColor }) => (
-        <Icon name="nintendo-game-boy" color={tintColor} type="material-community"/>
+        <Icon name="star" color={tintColor} type="feather"/>
       )
     }
   },
-  'Form': {
-    screen: NiceFormScreen,
+  'Profile': {
+    screen: ProfileScreen,
     navigationOptions: {
       tabBarIcon: ({ tintColor }) => (
-        <Icon name="form" color={tintColor} type="ant-design"/>
+        <Icon name="user" color={tintColor} type="feather"/>
       )
     }
   },
-  'Map': {
-    screen: MapScreen,
+  'More': {
+    screen: SearchScreen,
     navigationOptions: {
       tabBarIcon: ({ tintColor }) => (
-        <Icon name="world-o" color={tintColor} type="fontisto"/>
-      )
-    }
-  },
-  'Camera': {
-    screen: CameraScreen,
-    navigationOptions: {
-      tabBarIcon: ({ tintColor }) => (
-        <Icon name="camera" color={tintColor} type="material-community"/>
+        <Icon name="more-horizontal" color={tintColor} type="feather"/>
       )
     }
   },
