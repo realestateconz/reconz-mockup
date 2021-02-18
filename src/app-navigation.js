@@ -2,7 +2,7 @@ import React from 'react';
 import { createAppContainer } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { Icon } from 'react-native-elements';
-import HomeScreen from './screens/home-screen';
+import HomeScreen from './screens/home-screen/home-screen';
 import SearchScreen from './screens/search-screen';
 import SavedScreen from './screens/saved-screen';
 import ProfileScreen from './screens/profile-screen';
@@ -50,6 +50,11 @@ const TabNavigator = createBottomTabNavigator({
       )
     }
   },
+},{
+  tabBarOptions:{
+    activeTintColor: 'black',
+    inactiveTintColor: 'grey'
+  }
 });
 
 export default createAppContainer(TabNavigator);

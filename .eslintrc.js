@@ -19,6 +19,7 @@ module.exports = {
     "global-require": "off",
     "indent": ["error", 2],
     "object-curly-spacing": ["warn", "always"],
-    "brace-style": ["error", "1tbs", { "allowSingleLine": true }]
+    "brace-style": ["error", "1tbs", { "allowSingleLine": true }],
+    "semi": [2, "always"]
   },
 };

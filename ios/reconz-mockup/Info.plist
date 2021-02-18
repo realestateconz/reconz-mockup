@@ -65,6 +65,10 @@
 		<string>Octicons.ttf</string>
 		<string>Zocial.ttf</string>
 		<string>Fontisto.ttf</string>
+    <string>Quicksand-Bold.ttf</string>
+    <string>Quicksand-Light.ttf</string>
+    <string>Quicksand-Medium.ttf</string>
+    <string>Quicksand-Regular.ttf</string>  
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
