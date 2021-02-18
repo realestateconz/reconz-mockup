@@ -1,9 +1,16 @@
 import React, { useState } from 'react';
-import { SafeAreaView, View, Text } from 'react-native';
+import { SafeAreaView, LayoutAnimation, Text, ScrollView } from 'react-native';
 import FocusAwareStatusBar from '../../components/focus-aware-status-bar';
 import GreetingPanel from './greeting-panel';
-
+import NearYouPanel from './near-you-panel';
 const HomeScreen = () => {
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  const onLogin = (login) => {
+    LayoutAnimation.easeInEaseOut();
+    setLoggedIn(login);
+  };
+
   return (
     <>
       <FocusAwareStatusBar barStyle="dark-content" />
@@ -11,12 +18,14 @@ const HomeScreen = () => {
         style={{
           ...styles.container,
         }}>
-        <GreetingPanel />
-        <View
+        <GreetingPanel loggedIn={loggedIn} onLogin={onLogin}/>
+        <ScrollView
           style={styles.content}
         >
-          <Text>HELLO</Text>
-        </View>
+          {!loggedIn && (
+            <NearYouPanel/>
+          )}
+        </ScrollView>
       </SafeAreaView>
     </>
   );
