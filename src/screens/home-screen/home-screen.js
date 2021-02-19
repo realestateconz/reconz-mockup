@@ -3,6 +3,8 @@ import { SafeAreaView, LayoutAnimation, Text, ScrollView } from 'react-native';
 import FocusAwareStatusBar from '../../components/focus-aware-status-bar';
 import GreetingPanel from './greeting-panel';
 import NearYouPanel from './near-you-panel';
+import Carousel from '../../components/carousel';
+
 const HomeScreen = () => {
   const [loggedIn, setLoggedIn] = useState(false);
 
@@ -25,6 +27,11 @@ const HomeScreen = () => {
           {!loggedIn && (
             <NearYouPanel/>
           )}
+
+          <Carousel
+            title="Latest from previous search"
+            rightButtonText="See all"
+          />
         </ScrollView>
       </SafeAreaView>
     </>
