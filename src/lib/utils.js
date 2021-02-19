@@ -12,7 +12,7 @@ export const timeOfDayGreeting = (hour = getHours(new Date())) => {
 
 export const capitaliseWords = (sentence) => (
   sentence.split(' ')
-    .map((word)=>(
+    .map((word) => (
       word[0].toUpperCase() + word.substring(1)
     ))
     .join(' ')
