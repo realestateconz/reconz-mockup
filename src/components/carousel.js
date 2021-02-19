@@ -29,9 +29,10 @@ const Carousel = ({ title, rightButtonText }) => {
         showsHorizontalScrollIndicator={false}
         snapToAlignment="start"
         snapToInterval={MediumCard.width + MediumCard.marginLeft}
+        contentContainerStyle={{ paddingRight: MediumCard.marginLeft }}
         decelerationRate="fast"
       >
-        {range(50).map((i)=>(
+        {range(10).map((i)=>(
           <MediumCard
             key={i}
             style={styles.card}
