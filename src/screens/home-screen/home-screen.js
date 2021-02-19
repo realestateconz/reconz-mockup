@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SafeAreaView, LayoutAnimation, Text, ScrollView } from 'react-native';
+import { SafeAreaView, LayoutAnimation, ScrollView } from 'react-native';
 import FocusAwareStatusBar from '../../components/focus-aware-status-bar';
 import GreetingPanel from './greeting-panel';
 import NearYouPanel from './near-you-panel';

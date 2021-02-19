@@ -2,8 +2,9 @@ import React from 'react';
 import { ScrollView, View, Text, Image } from 'react-native';
 import MediumCard from './medium-card';
 import { range } from 'lodash';
-import { AppHeader2Text, TextStyles } from '../components/app-text';
+import { AppHeader2Text, AppText, TextStyles } from '../components/app-text';
 import { Button } from 'react-native-elements';
+import AmenitiesRow from '../components/amenities-row';
 
 const Carousel = ({ title, rightButtonText }) => {
 
@@ -52,8 +53,12 @@ const Carousel = ({ title, rightButtonText }) => {
               >
                   324 Remuera Rd, Remuera, Auckland
               </Text>
-              <Text>Negotiation</Text>
-              <Text>ameneties</Text>
+              <AppText>Negotiation</AppText>
+              <AmenitiesRow
+                bedroomCount={4}
+                bathroomCount={3}
+                buildingType="House"
+              />
             </View>
           </MediumCard>
         ))}

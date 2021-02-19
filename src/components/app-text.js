@@ -3,10 +3,7 @@ import { Text } from 'react-native';
 
 export const AppText = (props) => (
   <Text
-    style={{
-      fontFamily: 'Quicksand-Regular',
-      fontSize: 15
-    }}
+    style={TextStyles.appText}
   >
     {props.children}
   </Text>
@@ -37,6 +34,10 @@ export const AppHeader1Text = (props) => (
 );
 
 export const TextStyles = {
+  appText: {
+    fontFamily: 'Quicksand-Regular',
+    fontSize: 15
+  },
   appHeader1Text: {
     fontFamily: 'Quicksand-Medium',
     fontSize: 20,
