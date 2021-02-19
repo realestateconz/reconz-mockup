@@ -2,18 +2,18 @@ import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import { Styles } from '../shared-styles';
 
-const MediumCard = ({ children }) => {
+const MediumCard = ({ children, style = {} }) => {
   return (
     <TouchableOpacity
-      style={styles.container}
+      style={[styles.container, style]}
     >
       {children}
     </TouchableOpacity>
   );
 };
 
-MediumCard.width = 200;
-MediumCard.height = 160;
+MediumCard.width = 250;
+MediumCard.height = 200;
 MediumCard.marginLeft = 20;
 
 const styles = {

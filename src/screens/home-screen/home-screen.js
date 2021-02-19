@@ -32,6 +32,13 @@ const HomeScreen = () => {
             title="Latest from previous search"
             rightButtonText="See all"
           />
+
+          {loggedIn && (
+            <Carousel
+              title="Recommendations just for you"
+              rightButtonText="View all"
+            />
+          )}
         </ScrollView>
       </SafeAreaView>
     </>
