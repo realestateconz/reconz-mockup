@@ -9,6 +9,7 @@ import HomeScreen from './screens/home-screen/home-screen';
 import SearchScreen from './screens/search-screen';
 import SavedScreen from './screens/saved-screen';
 import UpdatesScreen from './screens/updates-screen';
+import DummyScreen from './screens/dummy-screen';
 
 
 
@@ -74,8 +75,95 @@ const TabNavigator = createBottomTabNavigator({
 
 const DrawerNavigator = createDrawerNavigator({
   Home: {
-    screen: TabNavigator
-  }
+    screen: TabNavigator,
+    navigationOptions: {
+      drawerLabel: 'Home',
+      drawerIcon: () => (
+        <Icon name="home" type="material-community" color="lightgrey"/>
+      )
+    }
+  },
+  MortgageCalculator: {
+    screen: DummyScreen,
+    navigationOptions: {
+      drawerLabel: 'Mortgage calculator',
+      drawerIcon: () => (
+        <Image source={require('../assets/images/mortgage-calculator-drawer-icon.png')}/>
+      )
+    }
+  },
+  AgentSearch: {
+    screen: DummyScreen,
+    navigationOptions: {
+      drawerLabel: 'Search for an agent',
+      drawerIcon: () => (
+        <Image source={require('../assets/images/agent-search-drawer-icon.png')}/>
+      )
+    }
+  },
+  News: {
+    screen: DummyScreen,
+    navigationOptions: {
+      drawerLabel: 'News',
+      drawerIcon: () => (
+        <Image source={require('../assets/images/news-drawer-icon.png')}/>
+      )
+    }
+  },
+  AgentPro: {
+    screen: DummyScreen,
+    navigationOptions: {
+      drawerLabel: 'Agent Pro website',
+      drawerIcon: () => (
+        <Image source={require('../assets/images/agent-pro-drawer-icon.png')}/>
+      )
+    }
+  },
+  ContactUs: {
+    screen: DummyScreen,
+    navigationOptions: {
+      drawerLabel: 'Contact us',
+      drawerIcon: () => (
+        <Image source={require('../assets/images/contact-us-drawer-icon.png')}/>
+      )
+    }
+  },
+  Help: {
+    screen: DummyScreen,
+    navigationOptions: {
+      drawerLabel: 'Help',
+      drawerIcon: () => (
+        <Image source={require('../assets/images/help-drawer-icon.png')}/>
+      )
+    }
+  },
+  RateApp: {
+    screen: DummyScreen,
+    navigationOptions: {
+      drawerLabel: 'Rate app / feedback',
+      drawerIcon: () => (
+        <Image source={require('../assets/images/rate-app-drawer-icon.png')}/>
+      )
+    }
+  },
+  About: {
+    screen: DummyScreen,
+    navigationOptions: {
+      drawerLabel: 'About realestate.co.nz',
+      drawerIcon: () => (
+        <Image source={require('../assets/images/about-drawer-icon.png')}/>
+      )
+    }
+  },
+  Legal: {
+    screen: DummyScreen,
+    navigationOptions: {
+      drawerLabel: 'Legal notices',
+      drawerIcon: () => (
+        <Image source={require('../assets/images/legal-drawer-icon.png')}/>
+      )
+    }
+  },
 },{
   drawerPosition: 'right',
   hideStatusBar: true,
