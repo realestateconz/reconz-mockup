@@ -1,11 +1,14 @@
 import React from 'react';
 import { createAppContainer } from 'react-navigation';
+import { Image } from 'react-native';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
+import { createDrawerNavigator } from 'react-navigation-drawer';
 import { Icon } from 'react-native-elements';
+import MoreDrawer from './components/more-drawer';
 import HomeScreen from './screens/home-screen/home-screen';
 import SearchScreen from './screens/search-screen';
 import SavedScreen from './screens/saved-screen';
-import ProfileScreen from './screens/profile-screen';
+import UpdatesScreen from './screens/updates-screen';
 
 
 
@@ -14,7 +17,11 @@ const TabNavigator = createBottomTabNavigator({
     screen: HomeScreen,
     navigationOptions: {
       tabBarIcon: ({ tintColor }) => (
-        <Icon name="home" color={tintColor} type="feather"/>
+        // <Icon name="user" color={tintColor} type="feather"/>
+        <Image
+          source={require('../assets/images/profile-tab-icon.png')}
+          style={{ tintColor }}
+        />
       )
     }
   },
@@ -34,21 +41,29 @@ const TabNavigator = createBottomTabNavigator({
       )
     }
   },
-  'Profile': {
-    screen: ProfileScreen,
+  'Updates': {
+    screen: UpdatesScreen,
     navigationOptions: {
       tabBarIcon: ({ tintColor }) => (
-        <Icon name="user" color={tintColor} type="feather"/>
+        <Icon name="bell" color={tintColor} type="feather"/>
       )
     }
   },
   'More': {
-    screen: SearchScreen,
-    navigationOptions: {
-      tabBarIcon: ({ tintColor }) => (
-        <Icon name="more-horizontal" color={tintColor} type="feather"/>
-      )
-    }
+    screen: () => null,
+    navigationOptions: ({ navigation }) => ({
+      tabBarIcon:
+        ({ tintColor }) => (
+          <Icon
+            name="more-horizontal"
+            color={tintColor}
+            type="feather"
+          />
+        ),
+      tabBarOnPress: () => {
+        navigation.openDrawer();
+      }
+    })
   },
 },{
   tabBarOptions:{
@@ -57,4 +72,16 @@ const TabNavigator = createBottomTabNavigator({
   }
 });
 
-export default createAppContainer(TabNavigator);
+const DrawerNavigator = createDrawerNavigator({
+  Home: {
+    screen: TabNavigator
+  }
+},{
+  drawerPosition: 'right',
+  hideStatusBar: true,
+  contentComponent: MoreDrawer
+});
+
+
+
+export default createAppContainer(DrawerNavigator);

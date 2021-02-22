@@ -3,6 +3,7 @@ import 'react-native-gesture-handler';
 import AppNavigation from './app-navigation';
 import { ThemeProvider } from 'react-native-elements';
 import { Platform, UIManager, Text, StatusBar } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-view';
 
 if (Platform.OS === 'android') {
   StatusBar.setTranslucent(true);
@@ -19,9 +20,11 @@ Text.defaultProps.style =  { fontFamily: 'Quicksand-Regular' };
 
 const App = () => {
   return (
-    <ThemeProvider>
-      <AppNavigation />
-    </ThemeProvider>
+    <SafeAreaProvider>
+      <ThemeProvider>
+        <AppNavigation />
+      </ThemeProvider>
+    </SafeAreaProvider>
   );
 };
 

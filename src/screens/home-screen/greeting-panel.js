@@ -4,6 +4,7 @@ import { AppText, AppHeader1Text } from '../../components/app-text';
 import { Button } from 'react-native-elements';
 import { Icon } from 'react-native-elements';
 import { timeOfDayGreeting, capitaliseWords } from '../../lib/utils';
+import ImageButton from '../../components/image-button';
 
 const GreetingPanel = ({ loggedIn = true, onLogin }) => {
   return (
@@ -19,12 +20,8 @@ const GreetingPanel = ({ loggedIn = true, onLogin }) => {
             </AppText>
           </View>
           <View>
-            <Icon
-              color="darkgrey"
-              reverse
-              name="user"
-              type="feather"
-              size={30}
+            <ImageButton
+              source={require('../../../assets/images/profile.png')}
               onPress={()=>{
                 onLogin(false);
               }}

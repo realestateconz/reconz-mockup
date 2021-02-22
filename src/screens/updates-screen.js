@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Text, View, LayoutAnimation } from 'react-native';
 import FocusAwareStatusBar from '../components/focus-aware-status-bar';
 
-const HomeScreen = () => {
+const UpdatesScreen = () => {
   return (
     <>
       <FocusAwareStatusBar barStyle="dark-content" />
@@ -14,7 +14,7 @@ const HomeScreen = () => {
         <View
           style={styles.content}
         >
-          <Text>Hello this is the Profile screen</Text>
+          <Text>Hello this is the Updates screen</Text>
         </View>
       </View>
     </>
@@ -28,11 +28,11 @@ const styles = {
     alignItems: 'center',
   },
   content: {
-    backgroundColor: 'orangered',
+    backgroundColor: 'orange',
     padding: 30,
     margin: 10,
     borderRadius: 10
   }
 };
 
-export default HomeScreen;
+export default UpdatesScreen;
