@@ -16,7 +16,7 @@ const Carousel = ({ title, rightButtonText }) => {
         <AppHeader2Text>{title}</AppHeader2Text>
         <Button
           title={rightButtonText}
-          titleStyle={{ color: 'grey' }}
+          titleStyle={[TextStyles.appHeader2Text, { color: 'grey' }]}
           buttonStyle={{ paddingRight:0 }}
           icon={{ name: 'chevron-right', color: 'grey' }}
           iconRight

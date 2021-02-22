@@ -1,71 +1,185 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import MapView from 'react-native-maps';
 import FocusAwareStatusBar from '../components/focus-aware-status-bar';
-import { Alert } from 'react-native';
-import { Input } from 'react-native-elements';
-import SafeAreaView from 'react-native-safe-area-view';
+import { Alert, SafeAreaView, View, LayoutAnimation, ScrollView } from 'react-native';
+import { AppText, AppHeader2Text, TextStyles } from '../components/app-text';
+import { Input, Button, ListItem, Icon } from 'react-native-elements';
+import { TouchableOpacity } from 'react-native';
 
 const mapStyle = require('../../assets/custom-map-style.json');
 
+const recentSearches = [
+  'Meadowbank, Auckland City',
+  'Orakei, Auckland City',
+  'Greenlane, Auckland City',
+  'Newmarket, Auckland City'
+];
+
 const MapScreen = () => {
+  const inputFieldRef = useRef(null);
   const [searchValue, setSearchValue] = useState('');
+  const [inputFieldFocused, setInputFieldFocused] = useState(false);
   return (
     <>
       <FocusAwareStatusBar barStyle="dark-content" />
-      <MapView
-        provider="google"
-        style={styles.container}
-        showsUserLocation
-        showsMyLocationButton
-        customMapStyle={mapStyle}
-        initialCamera={{
-          center: {
-            latitude:-36.88817344482469,
-            longitude: 174.7739190560335
-          },
-          pitch: 0,
-          heading: 0,
-          altitude: 0,
-          zoom: 12
-        }}
-      />
-
-      <SafeAreaView
-        style={[styles.overlay,styles.content]}
-        pointerEvents="box-none"
-      >
-        <Input
-          leftIcon={{
-            name:'search',
-            type: 'feather',
-            color: 'grey',
-            containerStyle: {
-              paddingHorizontal: 10
-            }
-          }}
-          rightIcon={{
-            name: 'options-outline',
-            type: 'ionicon',
-            color: 'black',
-            containerStyle: {
-              paddingHorizontal: 10,
-              borderLeftWidth: 1,
-              borderColor: 'lightgrey'
-            }
-          }}
-          placeholder="Enter suburb, region or city"
-          returnKeyType="search"
-          value={searchValue}
-          lightTheme
-          inputContainerStyle={styles.inputContainer}
-          containerStyle={styles.searchBarContainer}
-          onChangeText={(text)=>{
-            setSearchValue(text);
-          }}
-          onSubmitEditing={()=>{
-            Alert.alert('Search value submitted');
+      <View style={styles.overlay}>
+        <MapView
+          provider="google"
+          style={styles.container}
+          showsUserLocation
+          showsMyLocationButton
+          customMapStyle={mapStyle}
+          initialCamera={{
+            center: {
+              latitude:-36.88817344482469,
+              longitude: 174.7739190560335
+            },
+            pitch: 0,
+            heading: 0,
+            altitude: 0,
+            zoom: 12
           }}
         />
+
+      </View>
+
+      <SafeAreaView
+        style={[
+          styles.overlay,
+          { backgroundColor: inputFieldFocused ? 'white' : 'transparent' }
+        ]}
+        pointerEvents="box-none"
+      >
+        <View
+          style={styles.content}
+          pointerEvents="box-none"
+        >
+          <Input
+            ref={inputFieldRef}
+            leftIcon={{
+              name: inputFieldFocused ? 'chevron-left' : 'search',
+              type: 'feather',
+              color: 'grey',
+              containerStyle: {
+                paddingHorizontal: 10
+              },
+              onPress: () => {
+                if (inputFieldFocused) {
+                  inputFieldRef.current.blur();
+                } else {
+                  inputFieldRef.current.focus();
+                }
+              }
+            }}
+            rightIcon={{
+              name: 'options-outline',
+              type: 'ionicon',
+              color: 'black',
+              containerStyle: {
+                paddingHorizontal: 10,
+                borderLeftWidth: 1,
+                borderColor: 'lightgrey'
+              }
+            }}
+            placeholder="Enter suburb, region or city"
+            autoCapitalize="words"
+            autoCorrect={false}
+            autoCompleteType="off"
+            returnKeyType="done"
+            keyboardAppearance="dark"
+            value={searchValue}
+            lightTheme
+            inputContainerStyle={styles.inputContainer}
+            containerStyle={styles.searchBarContainer}
+            onChangeText={(text)=>{
+              setSearchValue(text);
+            }}
+            onSubmitEditing={()=>{
+              Alert.alert('Search value submitted');
+            }}
+            onFocus={()=>{
+              LayoutAnimation.easeInEaseOut();
+              setInputFieldFocused(true);
+            }}
+            onBlur={()=>{
+              LayoutAnimation.easeInEaseOut();
+              setInputFieldFocused(false);
+            }}
+          />
+        </View>
+        {!inputFieldFocused && (
+          <View
+            style={styles.bottomButtonContainer}
+            pointerEvents="box-none"
+          >
+            <Button
+              title="List view"
+              icon={{ name: 'menu', color: 'white' }}
+              buttonStyle={{
+                backgroundColor: 'dimgrey',
+                borderRadius: 20,
+                paddingHorizontal: 20,
+                width: 200
+              }}
+              titleStyle={TextStyles.appHeader1Text}
+              onPress={()=>{
+                Alert.alert('Pressed!');
+              }}
+            />
+          </View>
+        )}
+        {inputFieldFocused && (
+          <>
+            <View style={styles.headerRow}>
+              <AppText>14,392 total listings</AppText>
+
+              <Button
+                title="Browse all locations"
+                titleStyle={[TextStyles.appText,{ color: 'grey' }]}
+                buttonStyle={{ paddingRight:0 }}
+                icon={{ name: 'chevron-right', color: 'grey' }}
+                iconRight
+                type="clear"
+              />
+            </View>
+            <ScrollView
+              style={{
+                flex: 1,
+                width: '100%',
+                backgroundColor:'whitesmoke',
+                padding: 20
+              }}
+              keyboardShouldPersistTaps="always"
+            >
+              <AppHeader2Text>Recent Searches</AppHeader2Text>
+              {recentSearches.map((searchText) => (
+                <ListItem
+                  key={searchText}
+                  Component={TouchableOpacity}
+                  containerStyle={{
+                    backgroundColor: 'transparent',
+                    paddingHorizontal: 0
+                  }}
+                  onPress={()=>{
+                    setSearchValue(searchText);
+                  }}
+                >
+                  <Icon
+                    name="clock"
+                    type="feather"
+                    color="darkgrey"
+                  />
+                  <ListItem.Content>
+                    <AppText>
+                      {searchText}
+                    </AppText>
+                  </ListItem.Content>
+                </ListItem>
+              ))}
+            </ScrollView>
+          </>
+        )}
+
       </SafeAreaView>
     </>
   );
@@ -76,10 +190,11 @@ const styles = {
     flex: 1
   },
   content: {
-    flex: 1,
+    //flex: 1,
     justifyContent:'space-between',
     alignItems: 'center',
-    marginHorizontal: 20
+    marginHorizontal: 20,
+    marginBottom: 10
   },
   overlay: {
     position: 'absolute',
@@ -93,11 +208,23 @@ const styles = {
     borderBottomWidth: 0
   },
   inputContainer: {
-    //borderRadius: 30,
     backgroundColor:'white',
     borderColor: 'lightgrey',
     borderWidth: 1,
     borderBottomWidth: 1
+  },
+  bottomButtonContainer: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    paddingBottom: 10
+  },
+  headerRow: {
+    flexDirection: 'row',
+    padding: 20,
+    paddingTop: 0,
+    justifyContent:'space-between',
+    alignItems: 'center'
   }
 };
 

@@ -44,10 +44,12 @@ export const TextStyles = {
     fontWeight: '400'
   },
   appHeader2Text:{
+    fontFamily: 'Quicksand-Regular',
     fontSize: 18,
     fontWeight: '400'
   },
   appHeader3Text: {
+    fontFamily: 'Quicksand-Regular',
     fontSize: 16,
     fontWeight: '400'
   }
