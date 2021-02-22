@@ -19,6 +19,11 @@ const MapScreen = () => {
   const inputFieldRef = useRef(null);
   const [searchValue, setSearchValue] = useState('');
   const [inputFieldFocused, setInputFieldFocused] = useState(false);
+
+  const submitSearch = (value)=>{
+    Alert.alert('Search value submitted', value);
+  };
+
   return (
     <>
       <FocusAwareStatusBar barStyle="dark-content" />
@@ -81,6 +86,7 @@ const MapScreen = () => {
                 borderColor: 'lightgrey'
               }
             }}
+            inputStyle={TextStyles.appHeader2Text}
             placeholder="Enter suburb, region or city"
             autoCapitalize="words"
             autoCorrect={false}
@@ -95,7 +101,7 @@ const MapScreen = () => {
               setSearchValue(text);
             }}
             onSubmitEditing={()=>{
-              Alert.alert('Search value submitted');
+              submitSearch(searchValue);
             }}
             onFocus={()=>{
               LayoutAnimation.easeInEaseOut();
@@ -162,6 +168,8 @@ const MapScreen = () => {
                   }}
                   onPress={()=>{
                     setSearchValue(searchText);
+                    inputFieldRef.current.blur();
+                    submitSearch(searchText);
                   }}
                 >
                   <Icon
