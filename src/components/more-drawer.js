@@ -1,12 +1,16 @@
 import React from 'react';
-import { SafeAreaView, ScrollView, Text, View, Image } from 'react-native';
+import { ScrollView, Text, View, Image } from 'react-native';
 import { AppText, AppHeader1Text, AppHeader2Text, AppHeader3Text, TextStyles } from '../components/app-text';
 import { DrawerItems } from 'react-navigation-drawer';
 import { ListItem } from 'react-native-elements';
+import SafeAreaView from 'react-native-safe-area-view';
 
 const MoreDrawer = (props) => {
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView
+      forceInset={{ top: 'always' }}
+      style={styles.container}
+    >
       <View style={styles.leftIndent}>
         <View style={styles.headerRow}>
           <Image
@@ -74,7 +78,8 @@ const styles = {
     color: 'white'
   },
   headerRow: {
-    flexDirection: 'row'
+    flexDirection: 'row',
+    marginTop: 10
   }
 };
 

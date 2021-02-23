@@ -1,10 +1,11 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import MapView from 'react-native-maps';
 import FocusAwareStatusBar from '../components/focus-aware-status-bar';
-import { Alert, SafeAreaView, View, LayoutAnimation, ScrollView } from 'react-native';
+import { Platform, Alert, View, LayoutAnimation, ScrollView, PermissionsAndroid } from 'react-native';
 import { AppText, AppHeader2Text, TextStyles } from '../components/app-text';
 import { Input, Button, ListItem, Icon } from 'react-native-elements';
 import { TouchableOpacity } from 'react-native';
+import SafeAreaView from 'react-native-safe-area-view';
 
 const mapStyle = require('../../assets/custom-map-style.json');
 
@@ -18,7 +19,14 @@ const recentSearches = [
 const MapScreen = () => {
   const inputFieldRef = useRef(null);
   const [searchValue, setSearchValue] = useState('');
+  const [ mapPaddingTop, setMapPaddingTop ] = useState(1);
   const [inputFieldFocused, setInputFieldFocused] = useState(false);
+
+  useEffect(()=>{
+    setTimeout(()=>{
+      setMapPaddingTop(0);
+    },100);
+  },[]);
 
   const submitSearch = (value)=>{
     Alert.alert('Search value submitted', value);
@@ -27,12 +35,12 @@ const MapScreen = () => {
   return (
     <>
       <FocusAwareStatusBar barStyle="dark-content" />
-      <View style={styles.overlay}>
+      <View style={[styles.overlay,{ paddingTop: mapPaddingTop }]}>
         <MapView
           provider="google"
           style={styles.container}
           showsUserLocation
-          showsMyLocationButton
+          showsMyLocationButton={Platform.OS === 'ios'}
           customMapStyle={mapStyle}
           initialCamera={{
             center: {
@@ -44,11 +52,21 @@ const MapScreen = () => {
             altitude: 0,
             zoom: 12
           }}
+          onMapReady={()=>{
+            if (Platform.OS === 'android') {
+              PermissionsAndroid.request(
+                PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
+              ).then(granted => {
+                console.log('Location permission granted!');
+              });
+            }
+          }}
         />
 
       </View>
 
       <SafeAreaView
+        forceInset={{ top: 'always' }}
         style={[
           styles.overlay,
           { backgroundColor: inputFieldFocused ? 'white' : 'transparent' }
