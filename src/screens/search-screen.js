@@ -4,10 +4,16 @@ import FocusAwareStatusBar from '../components/focus-aware-status-bar';
 import { Platform, Alert, View, LayoutAnimation, ScrollView, PermissionsAndroid } from 'react-native';
 import { AppText, AppHeader2Text, TextStyles } from '../components/app-text';
 import { Input, Button, ListItem, Icon } from 'react-native-elements';
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, Text } from 'react-native';
 import SafeAreaView from 'react-native-safe-area-view';
+import SlidingUpPanel from 'rn-sliding-up-panel';
+import ListingSelector from '../components/listing-selector';
+import { Styles } from '../shared-styles';
 
 const mapStyle = require('../../assets/custom-map-style.json');
+
+const PANEL_MIN_HEIGHT = 30;
+const PANEL_MID_HEIGHT = 400;
 
 const recentSearches = [
   'Meadowbank, Auckland City',
@@ -17,30 +23,60 @@ const recentSearches = [
 ];
 
 const MapScreen = () => {
+  const slidingUpPanelRef = useRef(null);
   const inputFieldRef = useRef(null);
+  const mapRef = useRef(null);
+  const [panelMaxHeight, setPanelMaxHeight] = useState(0);
+  const [panelHeight, setPanelHeight] = useState(PANEL_MIN_HEIGHT);
+  const [userLocation, setUserLocation] = useState(null);
   const [searchValue, setSearchValue] = useState('');
   const [ mapPaddingTop, setMapPaddingTop ] = useState(1);
   const [inputFieldFocused, setInputFieldFocused] = useState(false);
 
-  useEffect(()=>{
+  useEffect(() => {
     setTimeout(()=>{
       setMapPaddingTop(0);
     },100);
   },[]);
 
-  const submitSearch = (value)=>{
+  const submitSearch = (value) => {
     Alert.alert('Search value submitted', value);
   };
+
+  const moveMapToLocation = (location) => {
+    if (location) {
+      mapRef.current.animateCamera({
+        center: location,
+        zoom: 17
+      }, 1000);
+    }
+  };
+
+  const animateForPanelChange = (newPanelHeight) => {
+    LayoutAnimation.easeInEaseOut();
+    setPanelHeight(newPanelHeight);
+  };
+
+  const isPanelFullScreen = (thePanelHeight) => (
+    thePanelHeight > PANEL_MID_HEIGHT
+  );
 
   return (
     <>
       <FocusAwareStatusBar barStyle="dark-content" />
-      <View style={[styles.overlay,{ paddingTop: mapPaddingTop }]}>
+      <View
+        style={{ ...Styles.overlay, paddingTop: mapPaddingTop }}
+        onLayout={({ nativeEvent })=>{
+          const { layout: { height: viewHeight } } = nativeEvent;
+          setPanelMaxHeight(viewHeight);
+        }}
+      >
         <MapView
+          ref={mapRef}
           provider="google"
           style={styles.container}
+          mapPadding={{ bottom: PANEL_MIN_HEIGHT }}
           showsUserLocation
-          showsMyLocationButton={Platform.OS === 'ios'}
           customMapStyle={mapStyle}
           initialCamera={{
             center: {
@@ -61,6 +97,9 @@ const MapScreen = () => {
               });
             }
           }}
+          onUserLocationChange={({ nativeEvent: { coordinate } })=>{
+            setUserLocation(coordinate);
+          }}
         />
 
       </View>
@@ -68,7 +107,112 @@ const MapScreen = () => {
       <SafeAreaView
         forceInset={{ top: 'always' }}
         style={[
-          styles.overlay,
+          Styles.overlay
+        ]}
+        pointerEvents="box-none"
+      >
+        <View
+          style={{
+            flex:1,
+            paddingBottom: panelHeight,
+            justifyContent: 'flex-end',
+            alignItems: 'flex-end'
+          }}
+          pointerEvents="box-none"
+        >
+          <Icon
+            name="location-arrow"
+            type="font-awesome"
+            color="white"
+            reverse
+            reverseColor="grey"
+            raised
+            onPress={() => {
+              moveMapToLocation(userLocation);
+            }}
+          />
+        </View>
+        <SlidingUpPanel
+          ref={slidingUpPanelRef}
+          showBackdrop={false}
+          draggableRange={{
+            top: panelMaxHeight || PANEL_MID_HEIGHT,
+            bottom: PANEL_MIN_HEIGHT
+          }}
+          onDragEnd={(newPanelHeight)=>{animateForPanelChange(newPanelHeight);}}
+          onMomentumDragEnd={(newPanelHeight)=>{animateForPanelChange(newPanelHeight);}}
+          onBottomReached={()=>{animateForPanelChange(PANEL_MIN_HEIGHT);}}
+          snappingPoints={[PANEL_MIN_HEIGHT, PANEL_MID_HEIGHT, panelMaxHeight]}
+        >
+          {dragHandler =>(
+            <View style={{
+              flex: 1,
+              backgroundColor: 'white',
+              alignItems: 'center',
+              justifyContent: 'flex-start',
+              paddingTop: isPanelFullScreen(panelHeight) ? 150 : 0
+            }}>
+              {!isPanelFullScreen(panelHeight) && (
+                <View
+                  style={{
+                    height: PANEL_MIN_HEIGHT,
+                    alignSelf:'stretch',
+                    alignItems: 'center',
+                    justifyContent:'center',
+                  }}
+                  {...dragHandler}
+                >
+                  <View
+                    style={{ width: 60, height: 4, borderRadius: 2, backgroundColor: 'lightgrey' }}
+                  />
+                </View>
+              )}
+
+              <ListingSelector
+                title="2,453 properties for sale"
+                height={panelMaxHeight}
+                marginTop={0}
+              />
+            </View>
+          )}
+        </SlidingUpPanel>
+      </SafeAreaView>
+
+      <View
+        style={{
+          ...Styles.overlay,
+          justifyContent: 'flex-end',
+          paddingBottom: 15,
+          alignItems: 'center'
+        }}
+        pointerEvents="box-none"
+      >
+        {isPanelFullScreen(panelHeight) && (
+          <Button
+            title="Map view"
+            icon={{
+              name: 'map',
+              type: 'feather',
+              color: 'white'
+            }}
+            buttonStyle={{
+              backgroundColor: 'dimgrey',
+              borderRadius: 20,
+              paddingHorizontal: 20,
+              width: 200
+            }}
+            titleStyle={TextStyles.appHeader1Text}
+            onPress={()=>{
+              slidingUpPanelRef.current.hide();
+            }}
+          />
+        )}
+      </View>
+
+      <SafeAreaView
+        forceInset={{ top: 'always' }}
+        style={[
+          Styles.overlay,
           { backgroundColor: inputFieldFocused ? 'white' : 'transparent' }
         ]}
         pointerEvents="box-none"
@@ -131,27 +275,7 @@ const MapScreen = () => {
             }}
           />
         </View>
-        {!inputFieldFocused && (
-          <View
-            style={styles.bottomButtonContainer}
-            pointerEvents="box-none"
-          >
-            <Button
-              title="List view"
-              icon={{ name: 'menu', color: 'white' }}
-              buttonStyle={{
-                backgroundColor: 'dimgrey',
-                borderRadius: 20,
-                paddingHorizontal: 20,
-                width: 200
-              }}
-              titleStyle={TextStyles.appHeader1Text}
-              onPress={()=>{
-                Alert.alert('Pressed!');
-              }}
-            />
-          </View>
-        )}
+
         {inputFieldFocused && (
           <>
             <View style={styles.headerRow}>
@@ -216,16 +340,10 @@ const styles = {
     flex: 1
   },
   content: {
-    //flex: 1,
     justifyContent:'space-between',
     alignItems: 'center',
     marginHorizontal: 20,
     marginBottom: 10
-  },
-  overlay: {
-    position: 'absolute',
-    left: 0, right: 0,
-    top: 0, bottom: 0,
   },
   searchBarContainer: {
     width: '100%',

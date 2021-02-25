@@ -1,46 +1,36 @@
 import React from 'react';
 import { ScrollView, View, Text, Image } from 'react-native';
-import MediumCard from './medium-card';
+import LargeCard from './large-card';
 import { range } from 'lodash';
 import { AppHeader2Text, AppText, TextStyles } from '../components/app-text';
 import { Button } from 'react-native-elements';
 import AmenitiesRow from '../components/amenities-row';
+import { Styles } from '../shared-styles';
 
-const Carousel = ({ title, rightButtonText, marginTop = 20 }) => {
+const ListingSelector = ({ title, rightButtonText, marginTop = 20, height }) => {
 
   return (
-    <>
+    <View style={{ width: '100%', height }}>
       <View
         style={{ ...styles.headerContainer, marginTop }}
       >
         <AppHeader2Text>{title}</AppHeader2Text>
-        <Button
-          title={rightButtonText}
-          titleStyle={[TextStyles.appHeader2Text, { color: 'grey' }]}
-          buttonStyle={{ paddingRight:0 }}
-          icon={{ name: 'chevron-right', color: 'grey' }}
-          iconRight
-          type="clear"
-        />
       </View>
 
       <ScrollView
-        horizontal
         directionalLockEnabled
-        showsHorizontalScrollIndicator={false}
         snapToAlignment="start"
-        snapToInterval={MediumCard.width + MediumCard.marginLeft}
-        contentContainerStyle={{ paddingRight: MediumCard.marginLeft }}
-        decelerationRate="fast"
+        contentContainerStyle={{ paddingBottom: 150 }}
+        //decelerationRate="fast"
       >
         {range(10).map((i)=>(
-          <MediumCard
+          <View
             key={i}
             style={styles.card}
           >
             <Image
-              source={require('../../assets/images/tile-image-medium.png')}
-              style={{ width: MediumCard.width, height: 130 }}
+              source={require('../../assets/images/tile-image-large.png')}
+              style={{ width: '100%', height: LargeCard.height }}
               resizeMode="contain"
             />
             <View
@@ -60,10 +50,10 @@ const Carousel = ({ title, rightButtonText, marginTop = 20 }) => {
                 buildingType="House"
               />
             </View>
-          </MediumCard>
+          </View>
         ))}
       </ScrollView>
-    </>
+    </View>
   );
 };
 
@@ -72,21 +62,25 @@ const styles = {
     alignSelf: 'flex-start',
     paddingHorizontal: 20,
     marginTop: 20,
-    flexDirection: 'row',
+    // flexDirection: 'row',
     //backgroundColor: 'hotpink',
     //height: 40,
     width: '100%',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     alignItems: 'center'
   },
   card: {
     justifyContent: 'space-between',
     alignItems: 'flex-start',
-    paddingTop: 0
+    paddingTop: 0,
+    width: '100%',
+    paddingHorizontal: 20,
+    paddingBottom: 20,
+    //backgroundColor: 'limegreen'
   },
   cardTextContainer: {
     paddingLeft: 10,
-  }
+  },
 };
 
-export default Carousel;
+export default ListingSelector;

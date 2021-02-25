@@ -14,5 +14,12 @@ export const Styles = {
     shadowOffset: { width: 2, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4
+  },
+  overlay: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0
   }
 };
