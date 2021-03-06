@@ -1,14 +1,21 @@
 import React from 'react';
-import { ScrollView, View, Text, Image } from 'react-native';
+import { ScrollView, View, Text, Image, Dimensions } from 'react-native';
 import LargeCard from './large-card';
 import { range } from 'lodash';
 import { AppHeader2Text, AppText, TextStyles } from '../components/app-text';
-import { Button } from 'react-native-elements';
 import AmenitiesRow from '../components/amenities-row';
-import { Styles } from '../shared-styles';
+import TouchableScale from 'react-native-touchable-scale';
+import { useNavigation } from 'react-navigation-hooks';
+import { SharedElement } from 'react-navigation-shared-element';
+import Animated, {
+  useCode, block, lessThan, cond, set, call
+} from 'react-native-reanimated';
+
+const { width } = Dimensions.get('window');
+
 
 const ListingSelector = ({ title, rightButtonText, marginTop = 20, height }) => {
-
+  const { navigate } = useNavigation();
   return (
     <View style={{ width: '100%', height }}>
       <View
@@ -20,19 +27,24 @@ const ListingSelector = ({ title, rightButtonText, marginTop = 20, height }) => 
       <ScrollView
         directionalLockEnabled
         snapToAlignment="start"
-        contentContainerStyle={{ paddingBottom: 150 }}
+        contentContainerStyle={{ paddingBottom: 200 }}
         //decelerationRate="fast"
       >
         {range(10).map((i)=>(
-          <View
+          <TouchableScale
             key={i}
             style={styles.card}
+            onPress={() => {
+              navigate('ListingDetail');
+            }}
           >
-            <Image
-              source={require('../../assets/images/tile-image-large.png')}
-              style={{ width: '100%', height: LargeCard.height }}
-              resizeMode="contain"
-            />
+            <SharedElement id="image">
+              <Animated.Image
+                source={require('../../assets/images/tile-image-large.png')}
+                style={{ width: width - 2 * LargeCard.marginLeft, height: LargeCard.height }}
+                resizeMode="contain"
+              />
+            </SharedElement>
             <View
               style={styles.cardTextContainer}
             >
@@ -50,11 +62,15 @@ const ListingSelector = ({ title, rightButtonText, marginTop = 20, height }) => 
                 buildingType="House"
               />
             </View>
-          </View>
+          </TouchableScale>
         ))}
       </ScrollView>
     </View>
   );
+};
+
+ListingSelector.sharedElements = (navigation, otherNavigation, showing) => {
+  return ['image'];
 };
 
 const styles = {
@@ -75,8 +91,9 @@ const styles = {
     paddingTop: 0,
     width: '100%',
     paddingHorizontal: 20,
-    paddingBottom: 20,
-    //backgroundColor: 'limegreen'
+    marginBottom: 10,
+    paddingBottom: 10,
+    // backgroundColor: 'limegreen'
   },
   cardTextContainer: {
     paddingLeft: 10,

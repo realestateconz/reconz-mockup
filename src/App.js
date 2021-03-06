@@ -4,6 +4,8 @@ import AppNavigation from './app-navigation';
 import { ThemeProvider } from 'react-native-elements';
 import { Platform, UIManager, Text, StatusBar } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-view';
+import { Button } from 'react-native-elements';
+import TouchableScale from 'react-native-touchable-scale';
 
 if (Platform.OS === 'android') {
   StatusBar.setTranslucent(true);
@@ -17,6 +19,9 @@ if (Platform.OS === 'android') {
 Text.allowFontScaling = false;
 Text.defaultProps = Text.defaultProps || {};
 Text.defaultProps.style =  { fontFamily: 'Quicksand-Regular' };
+
+Button.defaultProps = Button.defaultProps || {};
+Button.defaultProps.TouchableComponent = TouchableScale;
 
 const App = () => {
   return (

@@ -5,9 +5,12 @@ import { range } from 'lodash';
 import { AppHeader2Text, AppText, TextStyles } from '../components/app-text';
 import { Button } from 'react-native-elements';
 import AmenitiesRow from '../components/amenities-row';
+import { useNavigation } from 'react-navigation-hooks';
+import { SharedElement } from 'react-navigation-shared-element';
+
 
 const Carousel = ({ title, rightButtonText, marginTop = 20 }) => {
-
+  const { navigate } = useNavigation();
   return (
     <>
       <View
@@ -37,12 +40,17 @@ const Carousel = ({ title, rightButtonText, marginTop = 20 }) => {
           <MediumCard
             key={i}
             style={styles.card}
+            onPress={()=>{
+              navigate('ListingDetail');
+            }}
           >
-            <Image
-              source={require('../../assets/images/tile-image-medium.png')}
-              style={{ width: MediumCard.width, height: 130 }}
-              resizeMode="contain"
-            />
+            <SharedElement id="image">
+              <Image
+                source={require('../../assets/images/tile-image-medium.png')}
+                style={{ width: MediumCard.width, height: 130 }}
+                resizeMode="contain"
+              />
+            </SharedElement>
             <View
               style={styles.cardTextContainer}
             >

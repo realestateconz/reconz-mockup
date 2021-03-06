@@ -2,7 +2,6 @@ import React from 'react';
 import { View } from 'react-native';
 import { AppText, AppHeader1Text } from '../../components/app-text';
 import { Button } from 'react-native-elements';
-import { Icon } from 'react-native-elements';
 import { timeOfDayGreeting, capitaliseWords } from '../../lib/utils';
 import ImageButton from '../../components/image-button';
 
@@ -22,7 +21,7 @@ const GreetingPanel = ({ loggedIn = true, onLogin }) => {
           <View>
             <ImageButton
               source={require('../../../assets/images/profile.png')}
-              onPress={()=>{
+              onPress={() => {
                 onLogin(false);
               }}
             />

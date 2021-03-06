@@ -1,14 +1,14 @@
 import React from 'react';
-import { TouchableOpacity } from 'react-native';
-import { Styles } from '../shared-styles';
+import Card from './card';
 
-const LargeCard = ({ children, style = {} }) => {
+const LargeCard = ({ children, style = {}, ...cardProps }) => {
   return (
-    <TouchableOpacity
+    <Card
       style={[styles.container, style]}
+      {...cardProps}
     >
       {children}
-    </TouchableOpacity>
+    </Card>
   );
 };
 
@@ -21,14 +21,6 @@ const styles = {
     width: LargeCard.width,
     height: LargeCard.height,
     marginLeft: LargeCard.marginLeft,
-    alignItems: 'center',
-    justifyContent: 'space-around',
-    paddingTop: 5,
-    paddingBottom: 5,
-    marginVertical: 10,
-    backgroundColor: 'lightgrey',
-    borderRadius: 3,
-    ...Styles.shadow
   }
 };
 

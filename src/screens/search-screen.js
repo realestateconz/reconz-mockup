@@ -4,7 +4,7 @@ import FocusAwareStatusBar from '../components/focus-aware-status-bar';
 import { Platform, Alert, View, LayoutAnimation, ScrollView, PermissionsAndroid } from 'react-native';
 import { AppText, AppHeader2Text, TextStyles } from '../components/app-text';
 import { Input, Button, ListItem, Icon } from 'react-native-elements';
-import { TouchableOpacity, Text } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import SafeAreaView from 'react-native-safe-area-view';
 import SlidingUpPanel from 'rn-sliding-up-panel';
 import ListingSelector from '../components/listing-selector';
@@ -12,7 +12,8 @@ import { Styles } from '../shared-styles';
 
 const mapStyle = require('../../assets/custom-map-style.json');
 
-const PANEL_MIN_HEIGHT = 30;
+const PANEL_MIN_HEIGHT = 60;
+const PANEL_HANDLE_HEIGHT = 30;
 const PANEL_MID_HEIGHT = 400;
 
 const recentSearches = [
@@ -22,7 +23,7 @@ const recentSearches = [
   'Newmarket, Auckland City'
 ];
 
-const MapScreen = () => {
+const SearchScreen = () => {
   const slidingUpPanelRef = useRef(null);
   const inputFieldRef = useRef(null);
   const mapRef = useRef(null);
@@ -155,7 +156,7 @@ const MapScreen = () => {
               {!isPanelFullScreen(panelHeight) && (
                 <View
                   style={{
-                    height: PANEL_MIN_HEIGHT,
+                    height: PANEL_HANDLE_HEIGHT,
                     alignSelf:'stretch',
                     alignItems: 'center',
                     justifyContent:'center',
@@ -372,4 +373,4 @@ const styles = {
   }
 };
 
-export default MapScreen;
+export default SearchScreen;

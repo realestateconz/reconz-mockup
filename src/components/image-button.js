@@ -1,10 +1,9 @@
 import React from 'react';
 import {
   Image,
-  TouchableOpacity
 } from 'react-native';
 import PropTypes from 'prop-types';
-
+import TouchableScale from 'react-native-touchable-scale';
 
 const ImageButton = ({
   resizeMode = 'cover',
@@ -13,7 +12,7 @@ const ImageButton = ({
   style,
   onPress
 }) => (
-  <TouchableOpacity
+  <TouchableScale
     style={style}
     onPress={onPress}
   >
@@ -22,7 +21,7 @@ const ImageButton = ({
       source={source}
       resizeMode={resizeMode}
     />
-  </TouchableOpacity>
+  </TouchableScale>
 );
 
 ImageButton.propTypes = {

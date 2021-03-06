@@ -3,6 +3,7 @@ import { createAppContainer } from 'react-navigation';
 import { Image } from 'react-native';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createDrawerNavigator } from 'react-navigation-drawer';
+import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
 import { Icon } from 'react-native-elements';
 import MoreDrawer from './components/more-drawer';
 import HomeScreen from './screens/home-screen/home-screen';
@@ -10,8 +11,8 @@ import SearchScreen from './screens/search-screen';
 import SavedScreen from './screens/saved-screen';
 import UpdatesScreen from './screens/updates-screen';
 import DummyScreen from './screens/dummy-screen';
-
-
+import { createStackNavigator, CardStyleInterpolators } from 'react-navigation-stack';
+import ListingDetailScreen from './screens/listing-detail-screen';
 
 const TabNavigator = createBottomTabNavigator({
   'For you': {
@@ -73,9 +74,24 @@ const TabNavigator = createBottomTabNavigator({
   }
 });
 
+const ListingStack = createSharedElementStackNavigator({
+  'HomeTabs': {
+    screen: TabNavigator
+  },
+  'ListingDetail': {
+    screen: ListingDetailScreen
+  }
+},{
+  defaultNavigationOptions: {
+    headerShown: false,
+    cardStyleInterpolator: CardStyleInterpolators.forFadeFromBottomAndroid
+  }
+});
+
+
 const DrawerNavigator = createDrawerNavigator({
   Home: {
-    screen: TabNavigator,
+    screen: ListingStack,
     navigationOptions: {
       drawerLabel: 'Home',
       drawerIcon: () => (
