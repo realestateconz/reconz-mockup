@@ -91,11 +91,11 @@ PODS:
   - OpenSSL-Universal (1.0.2.20):
     - OpenSSL-Universal/Static (= 1.0.2.20)
   - OpenSSL-Universal/Static (1.0.2.20)
-  - Permission-Camera (3.0.0):
+  - Permission-Camera (3.0.1):
     - RNPermissions
-  - Permission-PhotoLibrary (3.0.0):
+  - Permission-PhotoLibrary (3.0.1):
     - RNPermissions
-  - Permission-PhotoLibraryAddOnly (3.0.0):
+  - Permission-PhotoLibraryAddOnly (3.0.1):
     - RNPermissions
   - RCTRequired (0.63.4)
   - RCTTypeSafety (0.63.4):
@@ -263,13 +263,13 @@ PODS:
     - React-cxxreact (= 0.63.4)
     - React-jsi (= 0.63.4)
   - React-jsinspector (0.63.4)
-  - react-native-camera (3.42.0):
+  - react-native-camera (3.43.0):
     - React-Core
-    - react-native-camera/RCT (= 3.42.0)
-    - react-native-camera/RN (= 3.42.0)
-  - react-native-camera/RCT (3.42.0):
+    - react-native-camera/RCT (= 3.43.0)
+    - react-native-camera/RN (= 3.43.0)
+  - react-native-camera/RCT (3.43.0):
     - React-Core
-  - react-native-camera/RN (3.42.0):
+  - react-native-camera/RN (3.43.0):
     - React-Core
   - react-native-cameraroll (4.0.2):
     - React-Core
@@ -283,7 +283,7 @@ PODS:
     - React
   - react-native-maps (0.27.1):
     - React
-  - react-native-safe-area-context (3.1.9):
+  - react-native-safe-area-context (3.2.0):
     - React-Core
   - React-RCTActionSheet (0.63.4):
     - React-Core/RCTActionSheetHeaders (= 0.63.4)
@@ -347,19 +347,19 @@ PODS:
     - React-jsi (= 0.63.4)
   - RNCMaskedView (0.1.10):
     - React
-  - RNGestureHandler (1.9.0):
+  - RNGestureHandler (1.10.3):
     - React-Core
-  - RNPermissions (3.0.0):
+  - RNPermissions (3.0.1):
     - React-Core
   - RNReanimated (1.13.2):
     - React-Core
-  - RNScreens (2.17.1):
+  - RNScreens (2.18.1):
     - React-Core
-  - RNSensors (7.0.2):
+  - RNSensors (7.2.0):
     - React-Core
   - RNSharedElement (0.7.0):
     - React
-  - RNVectorIcons (8.0.0):
+  - RNVectorIcons (8.1.0):
     - React-Core
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
@@ -557,9 +557,9 @@ SPEC CHECKSUMS:
   Google-Maps-iOS-Utils: c32891ff472eaaa1fca032beedafa1a013af7875
   GoogleMaps: 32ca02de09de357a10ac773f2c70f1986751392d
   OpenSSL-Universal: ff34003318d5e1163e9529b08470708e389ffcdd
-  Permission-Camera: 358081c7b8210849958af181ce9ddeb11932aa82
-  Permission-PhotoLibrary: 79f74cef889ed76e1712fee9fe9a187e9a15dec1
-  Permission-PhotoLibraryAddOnly: b79f52e932b0714ff6b0774282dfa6ce0b7cfd8d
+  Permission-Camera: b2e50546c095139bb1264be9c34c796332340d32
+  Permission-PhotoLibrary: 29a07bdd077ae760363f73ab52d22a7b88cbd781
+  Permission-PhotoLibraryAddOnly: fa32d59bded28fe9f77519289ceba90df946382b
   RCTRequired: 082f10cd3f905d6c124597fd1c14f6f2655ff65e
   RCTTypeSafety: 8c9c544ecbf20337d069e4ae7fd9a377aadf504b
   React: b0a957a2c44da4113b0c4c9853d8387f8e64e615
@@ -570,12 +570,12 @@ SPEC CHECKSUMS:
   React-jsi: a0418934cf48f25b485631deb27c64dc40fb4c31
   React-jsiexecutor: 93bd528844ad21dc07aab1c67cb10abae6df6949
   React-jsinspector: 58aef7155bc9a9683f5b60b35eccea8722a4f53a
-  react-native-camera: d145df27a9178041b48b839b80ad79c9ef373fbd
-  react-native-cameraroll: 717193a0427fd0db78d3f10385a008fcc102213c
+  react-native-camera: f432fcf1b32b528bbf7c3543d3e3b1deb0c5b72a
+  react-native-cameraroll: 1965db75c851b15e77a22ca0ac78e32af6b571ae
   react-native-config: c98128a72bc2c3a1ca72caec0b021f0fa944aa29
   react-native-google-maps: 0a989abda71059db2caa98b9dacca7a8f38a47d0
   react-native-maps: f4b89da81626ad7f151a8bfcb79733295d31ce5c
-  react-native-safe-area-context: 86612d2c9a9e94e288319262d10b5f93f0b395f5
+  react-native-safe-area-context: f0906bf8bc9835ac9a9d3f97e8bde2a997d8da79
   React-RCTActionSheet: 89a0ca9f4a06c1f93c26067af074ccdce0f40336
   React-RCTAnimation: 1bde3ecc0c104c55df246eda516e0deb03c4e49b
   React-RCTBlob: a97d378b527740cc667e03ebfa183a75231ab0f0
@@ -586,14 +586,14 @@ SPEC CHECKSUMS:
   React-RCTText: 5c51df3f08cb9dedc6e790161195d12bac06101c
   React-RCTVibration: ae4f914cfe8de7d4de95ae1ea6cc8f6315d73d9d
   ReactCommon: 73d79c7039f473b76db6ff7c6b159c478acbbb3b
-  RNCMaskedView: f5c7d14d6847b7b44853f7acb6284c1da30a3459
-  RNGestureHandler: 9b7e605a741412e20e13c512738a31bd1611759b
-  RNPermissions: 350964d19150b183796a88180fb7ec62a1e41422
+  RNCMaskedView: 5a8ec07677aa885546a0d98da336457e2bea557f
+  RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
+  RNPermissions: 4c8a37b4dde50f1f152bf8cd08c4a43d2355829e
   RNReanimated: e03f7425cb7a38dcf1b644d680d1bfc91c3337ad
-  RNScreens: b6c9607e6fe47c1b6e2f1910d2acd46dd7ecea3a
-  RNSensors: e54fea720ad3e408a6225ae963300945c1263235
+  RNScreens: f7ad633b2e0190b77b6a7aab7f914fad6f198d8d
+  RNSensors: aefce56de71b313fbdeb6d26c024d7fc9258373f
   RNSharedElement: 00b1a1420d213a34459bb9a5aacabb38107d7948
-  RNVectorIcons: f67a1abce2ec73e62fe4606e8110e95a832bc859
+  RNVectorIcons: 31cebfcf94e8cf8686eb5303ae0357da64d7a5a4
   Yoga: 4bd86afe9883422a7c4028c00e34790f560923d6
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 

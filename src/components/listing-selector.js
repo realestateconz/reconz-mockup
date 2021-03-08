@@ -7,14 +7,13 @@ import AmenitiesRow from '../components/amenities-row';
 import TouchableScale from 'react-native-touchable-scale';
 import { useNavigation } from 'react-navigation-hooks';
 import { SharedElement } from 'react-navigation-shared-element';
-import Animated, {
-  useCode, block, lessThan, cond, set, call
-} from 'react-native-reanimated';
+import Animated from 'react-native-reanimated';
+import { sharedElementIdForKey } from '../lib/utils';
 
 const { width } = Dimensions.get('window');
 
 
-const ListingSelector = ({ title, rightButtonText, marginTop = 20, height }) => {
+const ListingSelector = ({ title, rightButtonText, marginTop = 20, height, sharedElementIdPrefix = 'image' }) => {
   const { navigate } = useNavigation();
   return (
     <View style={{ width: '100%', height }}>
@@ -35,10 +34,10 @@ const ListingSelector = ({ title, rightButtonText, marginTop = 20, height }) => 
             key={i}
             style={styles.card}
             onPress={() => {
-              navigate('ListingDetail');
+              navigate('ListingDetail', { sharedElementId: sharedElementIdForKey(sharedElementIdPrefix,i) });
             }}
           >
-            <SharedElement id="image">
+            <SharedElement id={sharedElementIdForKey(sharedElementIdPrefix, i)}>
               <Animated.Image
                 source={require('../../assets/images/tile-image-large.png')}
                 style={{ width: width - 2 * LargeCard.marginLeft, height: LargeCard.height }}
@@ -70,7 +69,7 @@ const ListingSelector = ({ title, rightButtonText, marginTop = 20, height }) => 
 };
 
 ListingSelector.sharedElements = (navigation, otherNavigation, showing) => {
-  return ['image'];
+  return ['image123'];
 };
 
 const styles = {

@@ -31,12 +31,14 @@ const HomeScreen = () => {
           <Carousel
             title="Latest from previous search"
             rightButtonText="See all"
+            sharedElementIdPrefix="recent"
           />
 
           {loggedIn && (
             <Carousel
               title="Recommendations just for you"
               rightButtonText="View all"
+              sharedElementIdPrefix="recommended"
             />
           )}
         </ScrollView>

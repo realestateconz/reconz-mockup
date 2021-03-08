@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Dimensions, SafeAreaView, StyleSheet } from 'react-native';
+import { View, Text, Dimensions, SafeAreaView, StyleSheet, Image } from 'react-native';
 import { Button, Icon } from 'react-native-elements';
 import { useNavigation } from 'react-navigation-hooks';
 import { SharedElement } from 'react-navigation-shared-element';
@@ -15,7 +15,7 @@ const headerHeight = height / 3;
 const PULL_DOWN_TRIGGER_VALUE = 50;
 
 const ListingDetailScreen = (props) => {
-  const { goBack } = useNavigation();
+  const { goBack, getParam } = useNavigation();
   const [scrollY, backTriggered] = useValues(0, 0);
   useCode(() =>
     block([
@@ -25,7 +25,9 @@ const ListingDetailScreen = (props) => {
       ),
       cond(
         backTriggered,
-        call([], () => goBack())
+        call([], () => {
+          goBack();
+        })
       )
     ]),
   [scrollY, backTriggered]
@@ -66,15 +68,15 @@ const ListingDetailScreen = (props) => {
         }}
       >
         <Animated.View>
-          <SharedElement id="image">
-            <Animated.Image
-              source={require('../../assets/images/tile-image-large.png')}
+          <SharedElement id={getParam('sharedElementId')}>
+            <Image
+              source={require('../../assets/images/tile-image-medium.png')}
               style={{
                 width,
                 height: headerHeight,
                 resizeMode: 'cover',
-                borderTopRightRadius: borderRadius,
-                borderTopLeftRadius: borderRadius
+                //borderTopRightRadius: borderRadius,
+                //borderTopLeftRadius: borderRadius
               }}
             />
           </SharedElement>
@@ -123,7 +125,7 @@ const ListingDetailScreen = (props) => {
 };
 
 ListingDetailScreen.sharedElements = (navigation, otherNavigation, showing) => {
-  return ['image'];
+  return [navigation.getParam('sharedElementId')];
 };
 
 const styles = {

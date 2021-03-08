@@ -11,51 +11,40 @@ import SearchScreen from './screens/search-screen';
 import SavedScreen from './screens/saved-screen';
 import UpdatesScreen from './screens/updates-screen';
 import DummyScreen from './screens/dummy-screen';
-// import { CardStyleInterpolators } from 'react-navigation-stack';
+import { CardStyleInterpolators } from 'react-navigation-stack';
 import ListingDetailScreen from './screens/listing-detail-screen';
 
-const forFadeIn = ({
-  current,
-  inverted,
-  layouts: {
-    screen
+const HomeStack = createSharedElementStackNavigator({
+  'Home': {
+    screen: HomeScreen
   },
-  closing
-}) => {
-  const opacity = current.progress.interpolate({
-    inputRange: [0, 0.5, 0.9, 1],
-    outputRange: [0, 0.25, 0.7, 1]
-  });
-  return {
-    cardStyle: {
-      opacity,
-    }
-  };
-};
+},{
+  defaultNavigationOptions: {
+    headerShown: false,
+    cardStyleInterpolator: CardStyleInterpolators.forFadeFromBottomAndroid
+  },
+  // navigationOptions: ({ navigation }) => {
+  //   let tabBarVisible = true;
+  //   if (navigation.state.index > 0) {
+  //     tabBarVisible = false;
+  //   }
 
-const HomeStack = createSharedElementStackNavigator(
-  {
-    Master: HomeScreen
-  },
-  {
-    initialRouteName: 'Master',
-    headerMode: 'none',
-  },
-  {
-    name: 'HomeStack',
-    //debug: true
-  }
-);
+  //   return {
+  //     tabBarVisible,
+  //   };
+  // }
+});
 
 const SearchStack = createSharedElementStackNavigator({
   'SearchHome': {
     screen: SearchScreen
   },
 },{
-  initialRouteName: 'SearchHome',
-  headerMode: 'none',
+  defaultNavigationOptions: {
+    headerShown: false,
+    cardStyleInterpolator: CardStyleInterpolators.forFadeFromBottomAndroid
+  }
 });
-
 
 const TabNavigator = createBottomTabNavigator({
   'For you': {
@@ -111,40 +100,34 @@ const TabNavigator = createBottomTabNavigator({
     })
   },
 },{
-  initialRouteName: 'For you',
+  // defaultNavigationOptions: () => ({ tabBarVisible:false }),
+  navigationOptions: {
+    headerShown: false,
+  },
   tabBarOptions:{
     activeTintColor: 'black',
     inactiveTintColor: 'grey'
   }
 });
 
-const MainStack = createSharedElementStackNavigator(
-  {
-    Master: TabNavigator,
-    ListingDetail: ListingDetailScreen
+const ListingStack = createSharedElementStackNavigator({
+  'HomeTabs': {
+    screen: TabNavigator
   },
-  {
-    initialRouteName: 'Master',
-    headerMode: 'none',
-    defaultNavigationOptions: {
-      cardStyleInterpolator: forFadeIn,
-      // onTransitionStart: () => {
-      //   console.log('!!! transition start');
-      // },
-      // onTransitionEnd: () => {
-      //   console.log('!!! transition end');
-      // }
-    },
-  },
-  {
-    name: 'MainStack',
-    //debug: true
+  'ListingDetail': {
+    screen: ListingDetailScreen
   }
-);
+},{
+  defaultNavigationOptions: {
+    headerShown: false,
+    cardStyleInterpolator: CardStyleInterpolators.forFadeFromBottomAndroid
+  }
+});
+
 
 const DrawerNavigator = createDrawerNavigator({
   Home: {
-    screen: MainStack,
+    screen: ListingStack,
     navigationOptions: {
       drawerLabel: 'Home',
       drawerIcon: () => (
@@ -238,6 +221,7 @@ const DrawerNavigator = createDrawerNavigator({
   hideStatusBar: true,
   contentComponent: MoreDrawer
 });
+
 
 
 export default createAppContainer(DrawerNavigator);

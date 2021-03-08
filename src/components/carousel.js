@@ -7,9 +7,9 @@ import { Button } from 'react-native-elements';
 import AmenitiesRow from '../components/amenities-row';
 import { useNavigation } from 'react-navigation-hooks';
 import { SharedElement } from 'react-navigation-shared-element';
+import { sharedElementIdForKey } from '../lib/utils';
 
-
-const Carousel = ({ title, rightButtonText, marginTop = 20 }) => {
+const Carousel = ({ title, rightButtonText, marginTop = 20, sharedElementIdPrefix = 'image' }) => {
   const { navigate } = useNavigation();
   return (
     <>
@@ -41,10 +41,10 @@ const Carousel = ({ title, rightButtonText, marginTop = 20 }) => {
             key={i}
             style={styles.card}
             onPress={()=>{
-              navigate('ListingDetail');
+              navigate('ListingDetail', { sharedElementId: sharedElementIdForKey(sharedElementIdPrefix,i) });
             }}
           >
-            <SharedElement id="image">
+            <SharedElement id={sharedElementIdForKey(sharedElementIdPrefix,i)}>
               <Image
                 source={require('../../assets/images/tile-image-medium.png')}
                 style={{ width: MediumCard.width, height: 130 }}

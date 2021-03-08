@@ -17,3 +17,7 @@ export const capitaliseWords = (sentence) => (
     ))
     .join(' ')
 );
+
+export const sharedElementIdForKey = (prefix,key) => (
+  `${prefix}${key}`
+);
