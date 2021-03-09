@@ -23,13 +23,13 @@ const forFadeIn = ({
   closing
 }) => {
   const opacity = current.progress.interpolate({
-    inputRange: [0, 0.5, 0.9, 1],
-    outputRange: [0, 0.25, 0.7, 1]
+    inputRange: [0, 0.5, 1],
+    outputRange: [0, 1, 1]
   });
   return {
     cardStyle: {
       opacity,
-    }
+    },
   };
 };
 
@@ -124,10 +124,14 @@ const MainStack = createSharedElementStackNavigator(
     ListingDetail: ListingDetailScreen
   },
   {
+    mode: 'modal',
     initialRouteName: 'Master',
     headerMode: 'none',
     defaultNavigationOptions: {
       cardStyleInterpolator: forFadeIn,
+      cardStyle: {
+        backgroundColor: 'transparent'
+      }
       // onTransitionStart: () => {
       //   console.log('!!! transition start');
       // },

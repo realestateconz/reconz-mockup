@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, Text, Dimensions, SafeAreaView, StyleSheet, Image, Platform, StatusBar } from 'react-native';
-import { Button, Icon, Header } from 'react-native-elements';
+import { View, Text, Dimensions, StyleSheet, Image, Platform, StatusBar } from 'react-native';
+import { Icon, Header } from 'react-native-elements';
 import { useNavigation } from 'react-navigation-hooks';
 import { SharedElement } from 'react-navigation-shared-element';
 import { onScrollEvent, useValues } from 'react-native-redash/lib/module/v1';
@@ -11,7 +11,6 @@ import Animated, {
 import { SpringScrollView } from 'react-native-spring-scrollview';
 import ListingSummary from '../components/listing-summary';
 import { AppHeader2Text, TextStyles } from '../components/app-text';
-import FocusAwareStatusBar from '../components/focus-aware-status-bar';
 
 const AnimatedScrollView = Platform.OS === 'ios'
   ? Animated.ScrollView
