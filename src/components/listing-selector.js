@@ -3,6 +3,7 @@ import { ScrollView, View, Text, Image, Dimensions } from 'react-native';
 import LargeCard from './large-card';
 import { range } from 'lodash';
 import { AppHeader2Text, AppText, TextStyles } from '../components/app-text';
+import ListingSummary from '../components/listing-summary';
 import AmenitiesRow from '../components/amenities-row';
 import TouchableScale from 'react-native-touchable-scale';
 import { useNavigation } from 'react-navigation-hooks';
@@ -44,23 +45,14 @@ const ListingSelector = ({ title, rightButtonText, marginTop = 20, height, share
                 resizeMode="contain"
               />
             </SharedElement>
-            <View
+            <ListingSummary
               style={styles.cardTextContainer}
-            >
-              <Text
-                style={TextStyles.appHeader3Text}
-                numberOfLines={1}
-                ellipsizeMode="tail"
-              >
-                  324 Remuera Rd, Remuera, Auckland
-              </Text>
-              <AppText>Negotiation</AppText>
-              <AmenitiesRow
-                bedroomCount={4}
-                bathroomCount={3}
-                buildingType="House"
-              />
-            </View>
+              address={'324 Remuera Rd, Remuera, Auckland'}
+              saleType={'Negotiation'}
+              bedroomCount={4}
+              bathroomCount={3}
+              buildingType="House"
+            />
           </TouchableScale>
         ))}
       </ScrollView>

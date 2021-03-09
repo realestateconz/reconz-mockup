@@ -1,0 +1,24 @@
+diff --git a/node_modules/react-native-spring-scrollview/SpringScrollView.js b/node_modules/react-native-spring-scrollview/SpringScrollView.js
+index 7a40801..dc01e8b 100644
+--- a/node_modules/react-native-spring-scrollview/SpringScrollView.js
++++ b/node_modules/react-native-spring-scrollview/SpringScrollView.js
+@@ -21,7 +21,7 @@ import {
+   ViewStyle,
+   ScrollView
+ } from "react-native";
+-import * as TextInputState from "react-native/lib/TextInputState";
++import * as TextInputState from "react-native/Libraries/Components/TextInput/TextInputState";
+ import { FooterStatus } from "./LoadingFooter";
+ import { NormalHeader } from "./NormalHeader";
+ import { NormalFooter } from "./NormalFooter";
+@@ -498,8 +498,8 @@ export class SpringScrollView extends React.PureComponent<SpringScrollViewPropTy
+   };
+ 
+   _onTouchBegin = () => {
+-    if (TextInputState.currentlyFocusedField())
+-      TextInputState.blurTextInput(TextInputState.currentlyFocusedField());
++    if (TextInputState.currentlyFocusedInput())
++      TextInputState.blurTextInput(TextInputState.currentlyFocusedInput());
+     this.props.tapToHideKeyboard && Keyboard.dismiss();
+     this.props.onTouchBegin && this.props.onTouchBegin();
+   };

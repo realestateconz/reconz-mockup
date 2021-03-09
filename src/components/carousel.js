@@ -4,7 +4,7 @@ import MediumCard from './medium-card';
 import { range } from 'lodash';
 import { AppHeader2Text, AppText, TextStyles } from '../components/app-text';
 import { Button } from 'react-native-elements';
-import AmenitiesRow from '../components/amenities-row';
+import ListingSummary from '../components/listing-summary';
 import { useNavigation } from 'react-navigation-hooks';
 import { SharedElement } from 'react-navigation-shared-element';
 import { sharedElementIdForKey } from '../lib/utils';
@@ -51,23 +51,14 @@ const Carousel = ({ title, rightButtonText, marginTop = 20, sharedElementIdPrefi
                 resizeMode="contain"
               />
             </SharedElement>
-            <View
+            <ListingSummary
               style={styles.cardTextContainer}
-            >
-              <Text
-                style={TextStyles.appHeader3Text}
-                numberOfLines={1}
-                ellipsizeMode="tail"
-              >
-                  324 Remuera Rd, Remuera, Auckland
-              </Text>
-              <AppText>Negotiation</AppText>
-              <AmenitiesRow
-                bedroomCount={4}
-                bathroomCount={3}
-                buildingType="House"
-              />
-            </View>
+              address={'324 Remuera Rd, Remuera, Auckland'}
+              saleType={'Negotiation'}
+              bedroomCount={4}
+              bathroomCount={3}
+              buildingType="House"
+            />
           </MediumCard>
         ))}
       </ScrollView>
@@ -81,8 +72,6 @@ const styles = {
     paddingHorizontal: 20,
     marginTop: 20,
     flexDirection: 'row',
-    //backgroundColor: 'hotpink',
-    //height: 40,
     width: '100%',
     justifyContent: 'space-between',
     alignItems: 'center'

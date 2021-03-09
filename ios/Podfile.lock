@@ -359,6 +359,8 @@ PODS:
     - React-Core
   - RNSharedElement (0.7.0):
     - React
+  - RNSpringScrollView (2.0.23):
+    - React
   - RNVectorIcons (8.1.0):
     - React-Core
   - Yoga (1.14.0)
@@ -430,6 +432,7 @@ DEPENDENCIES:
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNSensors (from `../node_modules/react-native-sensors`)
   - RNSharedElement (from `../node_modules/react-native-shared-element`)
+  - RNSpringScrollView (from `../node_modules/react-native-spring-scrollview/ios`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
@@ -533,6 +536,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-sensors"
   RNSharedElement:
     :path: "../node_modules/react-native-shared-element"
+  RNSpringScrollView:
+    :path: "../node_modules/react-native-spring-scrollview/ios"
   RNVectorIcons:
     :path: "../node_modules/react-native-vector-icons"
   Yoga:
@@ -593,6 +598,7 @@ SPEC CHECKSUMS:
   RNScreens: f7ad633b2e0190b77b6a7aab7f914fad6f198d8d
   RNSensors: aefce56de71b313fbdeb6d26c024d7fc9258373f
   RNSharedElement: 00b1a1420d213a34459bb9a5aacabb38107d7948
+  RNSpringScrollView: 8b0af44fda8b131d845b93bf5b1d0710152e4e61
   RNVectorIcons: 31cebfcf94e8cf8686eb5303ae0357da64d7a5a4
   Yoga: 4bd86afe9883422a7c4028c00e34790f560923d6
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a

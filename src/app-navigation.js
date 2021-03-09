@@ -235,7 +235,6 @@ const DrawerNavigator = createDrawerNavigator({
   },
 },{
   drawerPosition: 'right',
-  hideStatusBar: true,
   contentComponent: MoreDrawer
 });
 

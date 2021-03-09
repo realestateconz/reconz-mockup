@@ -12,10 +12,14 @@ export const timeOfDayGreeting = (hour = getHours(new Date())) => {
 
 export const capitaliseWords = (sentence) => (
   sentence.split(' ')
-    .map((word) => (
-      word[0].toUpperCase() + word.substring(1)
-    ))
+    .map((word) => capitaliseFirstLetter(word))
     .join(' ')
+);
+
+export const capitaliseFirstLetter = (string) => (
+  string.length > 0
+    ? string[0].toUpperCase() + string.substring(1)
+    : ''
 );
 
 export const sharedElementIdForKey = (prefix,key) => (

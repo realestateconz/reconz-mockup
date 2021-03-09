@@ -7,30 +7,42 @@ const AmenitiesRow = ({ bedroomCount, bathroomCount, buildingType }) => {
   return (
     <View style={styles.container}>
       <AppText>
-        <Icon
-          name="bed"
-          type="font-awesome"
-          size={TextStyles.appText.fontSize}
-          iconStyle={styles.iconStyle}
-          containerStyle={{}}
-        />
-        {` ${bedroomCount}  `}
-        <Icon
-          name="bath"
-          type="font-awesome"
-          size={TextStyles.appText.fontSize}
-          iconStyle={styles.iconStyle}
-          containerStyle={{}}
-        />
-        {` ${bathroomCount}   `}
-        <View
-          style={{
-            width: 1,
-            height: TextStyles.appText.fontSize,
-            backgroundColor: styles.iconStyle.color
-          }}
-        />
-        {`   ${buildingType}`}
+        {bedroomCount && (
+          <>
+            <Icon
+              name="bed"
+              type="font-awesome"
+              size={TextStyles.appText.fontSize}
+              iconStyle={styles.iconStyle}
+              containerStyle={{}}
+            />
+            {` ${bedroomCount}  `}
+          </>
+        )}
+        {bathroomCount && (
+          <>
+            <Icon
+              name="bath"
+              type="font-awesome"
+              size={TextStyles.appText.fontSize}
+              iconStyle={styles.iconStyle}
+              containerStyle={{}}
+            />
+            {` ${bathroomCount}   `}
+          </>
+        )}
+        {buildingType && (
+          <>
+            <View
+              style={{
+                width: 1,
+                height: TextStyles.appText.fontSize,
+                backgroundColor: styles.iconStyle.color
+              }}
+            />
+            {`   ${buildingType}`}
+          </>
+        )}
       </AppText>
     </View>
   );
