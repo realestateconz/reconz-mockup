@@ -1,20 +1,31 @@
 import React, { useState, useRef, useEffect } from 'react';
 import MapView from 'react-native-maps';
 import FocusAwareStatusBar from '../components/focus-aware-status-bar';
-import { Platform, Alert, View, LayoutAnimation, ScrollView, PermissionsAndroid } from 'react-native';
+import {
+  Platform, Alert, View,
+  LayoutAnimation, ScrollView,
+  PermissionsAndroid,
+} from 'react-native';
 import { AppText, AppHeader2Text, TextStyles } from '../components/app-text';
 import { Input, Button, ListItem, Icon } from 'react-native-elements';
 import { TouchableOpacity } from 'react-native';
 import SafeAreaView from 'react-native-safe-area-view';
 import SlidingUpPanel from 'rn-sliding-up-panel';
 import ListingSelector from '../components/listing-selector';
+import FilterPanel from '../components/filter-panel';
 import { Styles } from '../shared-styles';
-
+import { FILTER_TYPES } from '../shared-strings';
 const mapStyle = require('../../assets/custom-map-style.json');
 
 const PANEL_MIN_HEIGHT = 60;
 const PANEL_HANDLE_HEIGHT = 30;
 const PANEL_MID_HEIGHT = 400;
+
+const initialCurrentFilters = [
+  { value: 'Residential for sale', type: FILTER_TYPES.SALE_TYPE },
+  { value: { lower: 500000, upper: 1500000 }, description: '$500k - $1.5M', type: FILTER_TYPES.PRICE_RANGE },
+  { value: 'Open home', type: FILTER_TYPES.OPEN_HOME },
+];
 
 const recentSearches = [
   'Meadowbank, Auckland City',
@@ -33,6 +44,7 @@ const SearchScreen = () => {
   const [searchValue, setSearchValue] = useState('');
   const [ mapPaddingTop, setMapPaddingTop ] = useState(1);
   const [inputFieldFocused, setInputFieldFocused] = useState(false);
+  const [currentFilters, setCurrentFilters] = useState(initialCurrentFilters);
 
   useEffect(() => {
     setTimeout(()=>{
@@ -260,6 +272,7 @@ const SearchScreen = () => {
             lightTheme
             inputContainerStyle={styles.inputContainer}
             containerStyle={styles.searchBarContainer}
+            errorStyle={styles.errorStyle}
             onChangeText={(text)=>{
               setSearchValue(text);
             }}
@@ -276,6 +289,11 @@ const SearchScreen = () => {
             }}
           />
         </View>
+
+        <FilterPanel
+          filters={currentFilters}
+          onFiltersChange={setCurrentFilters}
+        />
 
         {inputFieldFocused && (
           <>
@@ -349,8 +367,12 @@ const styles = {
   searchBarContainer: {
     width: '100%',
     backgroundColor: 'transparent',
+    height: 50,
     borderTopWidth: 0,
     borderBottomWidth: 0
+  },
+  errorStyle: {
+    height: 0
   },
   inputContainer: {
     backgroundColor:'white',

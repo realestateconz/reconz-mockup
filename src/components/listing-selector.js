@@ -27,7 +27,7 @@ const ListingSelector = ({ title, rightButtonText, marginTop = 20, height, share
       <ScrollView
         directionalLockEnabled
         snapToAlignment="start"
-        contentContainerStyle={{ paddingBottom: 200 }}
+        contentContainerStyle={{ paddingBottom: 500 }}
         //decelerationRate="fast"
       >
         {range(10).map((i)=>(

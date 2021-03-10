@@ -1,0 +1,6 @@
+
+export const FILTER_TYPES = {
+  SALE_TYPE: 'SALE_TYPE',
+  PRICE_RANGE: 'PRICE_RANGE',
+  OPEN_HOME: 'OPEN_HOME'
+};
