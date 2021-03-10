@@ -6,6 +6,7 @@ import {
   LayoutAnimation, ScrollView,
   PermissionsAndroid,
 } from 'react-native';
+import * as Animatable from 'react-native-animatable';
 import { AppText, AppHeader2Text, TextStyles } from '../components/app-text';
 import { Input, Button, ListItem, Icon } from 'react-native-elements';
 import { TouchableOpacity } from 'react-native';
@@ -201,24 +202,28 @@ const SearchScreen = () => {
         pointerEvents="box-none"
       >
         {isPanelFullScreen(panelHeight) && (
-          <Button
-            title="Map view"
-            icon={{
-              name: 'map',
-              type: 'feather',
-              color: 'white'
-            }}
-            buttonStyle={{
-              backgroundColor: 'dimgrey',
-              borderRadius: 20,
-              paddingHorizontal: 20,
-              width: 200
-            }}
-            titleStyle={TextStyles.appHeader1Text}
-            onPress={()=>{
-              slidingUpPanelRef.current.hide();
-            }}
-          />
+          <Animatable.View
+            animation="fadeInUp"
+          >
+            <Button
+              title="Map view"
+              icon={{
+                name: 'map',
+                type: 'feather',
+                color: 'white'
+              }}
+              buttonStyle={{
+                backgroundColor: 'dimgrey',
+                borderRadius: 20,
+                paddingHorizontal: 20,
+                width: 200
+              }}
+              titleStyle={TextStyles.appHeader1Text}
+              onPress={()=>{
+                slidingUpPanelRef.current.hide();
+              }}
+            />
+          </Animatable.View>
         )}
       </View>
 
