@@ -7,9 +7,9 @@ import { FILTER_TYPES } from '../shared-strings';
 import { Icon } from 'react-native-elements';
 
 const filterTypeRightIcons = {
-  SALE_TYPE: { name: 'chevron-down', type: 'feather' },
-  PRICE_RANGE: { name: 'chevron-down', type: 'feather' },
-  OPEN_HOME: { name: 'close-circle', type: 'material-community' },
+  [FILTER_TYPES.SALE_TYPE]: { name: 'chevron-down', type: 'feather' },
+  [FILTER_TYPES.PRICE_RANGE]: { name: 'chevron-down', type: 'feather' },
+  [FILTER_TYPES.OPEN_HOME]: { name: 'close-circle', type: 'material-community' },
 };
 
 const FilterPanel = ({ filters, onFiltersChange }) => {
