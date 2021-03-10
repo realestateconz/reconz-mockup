@@ -11,8 +11,9 @@ import HomeScreen from './screens/home-screen/home-screen';
 import SearchScreen from './screens/search-screen';
 import SavedScreen from './screens/saved-screen';
 import UpdatesScreen from './screens/updates-screen';
-import DummyScreen from './screens/dummy-screen';
+import ModalScreen from './screens/modal-screen';
 import ListingDetailScreen from './screens/listing-detail-screen';
+import DummyScreen from './screens/dummy-screen';
 
 const forFadeIn = ({
   current,
@@ -163,7 +164,7 @@ const MainStack = createSharedElementStackNavigator({
 
 const ModalStack = createStackNavigator({
   Main: MainStack,
-  Modal: DummyScreen
+  Modal: ModalScreen
 },{
   mode: 'modal',
   initalRouteName: 'Main',
