@@ -5,6 +5,7 @@ import TouchableScale from 'react-native-touchable-scale';
 import { Styles } from '../shared-styles';
 import { FILTER_TYPES } from '../shared-strings';
 import { Icon } from 'react-native-elements';
+import { useNavigation } from 'react-navigation-hooks';
 
 const filterTypeRightIcons = {
   [FILTER_TYPES.SALE_TYPE]: { name: 'chevron-down', type: 'feather' },
@@ -13,7 +14,7 @@ const filterTypeRightIcons = {
 };
 
 const FilterPanel = ({ filters, onFiltersChange }) => {
-
+  const { navigate } = useNavigation();
   return (
     <View style={{ height: 40 }}>
       <ScrollView
@@ -24,28 +25,35 @@ const FilterPanel = ({ filters, onFiltersChange }) => {
         <View
           style={{ flexDirection:'row', alignItems: 'center' }}
         >
-          {filters.map((filter) => (
-            <TouchableScale
-              style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                backgroundColor: 'white',
-                borderColor: 'lightgrey',
-                borderWidth: 1,
-                height: 40, borderRadius: 20,
-                paddingHorizontal: 10,
-                marginRight: 10
-              }}
-            >
-              <AppText>{filter.description || filter.value}</AppText>
-              <Icon
-                style={{ paddingLeft: 5 }}
-                color="grey"
-                name={filterTypeRightIcons[filter.type].name}
-                type={filterTypeRightIcons[filter.type].type}
-              />
-            </TouchableScale>
-          ))}
+          {filters.map((filter) => {
+            const text = filter.description || filter.value;
+            return (
+              <TouchableScale
+                key={text}
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  backgroundColor: 'white',
+                  borderColor: 'lightgrey',
+                  borderWidth: 1,
+                  height: 40, borderRadius: 20,
+                  paddingHorizontal: 10,
+                  marginRight: 10
+                }}
+                onPress={() => {
+                  navigate('Modal');
+                }}
+              >
+                <AppText>{text}</AppText>
+                <Icon
+                  style={{ paddingLeft: 5 }}
+                  color="grey"
+                  name={filterTypeRightIcons[filter.type].name}
+                  type={filterTypeRightIcons[filter.type].type}
+                />
+              </TouchableScale>
+            );
+          })}
 
 
         </View>

@@ -3,6 +3,7 @@ import { createAppContainer } from 'react-navigation';
 import { Image } from 'react-native';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createDrawerNavigator } from 'react-navigation-drawer';
+import { createStackNavigator } from 'react-navigation-stack';
 import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
 import { Icon } from 'react-native-elements';
 import MoreDrawer from './components/more-drawer';
@@ -11,7 +12,6 @@ import SearchScreen from './screens/search-screen';
 import SavedScreen from './screens/saved-screen';
 import UpdatesScreen from './screens/updates-screen';
 import DummyScreen from './screens/dummy-screen';
-// import { CardStyleInterpolators } from 'react-navigation-stack';
 import ListingDetailScreen from './screens/listing-detail-screen';
 
 const forFadeIn = ({
@@ -29,6 +29,30 @@ const forFadeIn = ({
   return {
     cardStyle: {
       opacity,
+    },
+  };
+};
+
+const forModal = ({
+  current,
+  inverted,
+  layouts: {
+    screen
+  },
+  closing
+}) => {
+  return {
+    overlayStyle: {
+      opacity: current.progress.interpolate({
+        inputRange:[0,1],
+        outputRange:[0, 0.7]
+      })
+    },
+    cardStyle: {
+      transform: [{ translateY:current.progress.interpolate({
+        inputRange:[0,1],
+        outputRange:[screen.height,0]
+      }) }]
     },
   };
 };
@@ -118,37 +142,47 @@ const TabNavigator = createBottomTabNavigator({
   }
 });
 
-const MainStack = createSharedElementStackNavigator(
-  {
-    Master: TabNavigator,
-    ListingDetail: ListingDetailScreen
+const MainStack = createSharedElementStackNavigator({
+  Master: TabNavigator,
+  ListingDetail: ListingDetailScreen
+},
+{
+  mode: 'modal',
+  initialRouteName: 'Master',
+  headerMode: 'none',
+  defaultNavigationOptions: {
+    cardStyleInterpolator: forFadeIn,
+    cardStyle: {
+      backgroundColor: 'transparent'
+    }
   },
-  {
-    mode: 'modal',
-    initialRouteName: 'Master',
-    headerMode: 'none',
-    defaultNavigationOptions: {
-      cardStyleInterpolator: forFadeIn,
-      cardStyle: {
-        backgroundColor: 'transparent'
-      }
-      // onTransitionStart: () => {
-      //   console.log('!!! transition start');
-      // },
-      // onTransitionEnd: () => {
-      //   console.log('!!! transition end');
-      // }
+},
+{
+  name: 'MainStack',
+});
+
+const ModalStack = createStackNavigator({
+  Main: MainStack,
+  Modal: DummyScreen
+},{
+  mode: 'modal',
+  initalRouteName: 'Main',
+  headerMode: 'none',
+  defaultNavigationOptions: {
+    cardOverlayEnabled: true,
+    cardStyleInterpolator: forModal,
+    overlayStyle: {
+      backgroundColor: 'black'
     },
-  },
-  {
-    name: 'MainStack',
-    //debug: true
+    cardStyle: {
+      backgroundColor: 'transparent',
+    }
   }
-);
+});
 
 const DrawerNavigator = createDrawerNavigator({
   Home: {
-    screen: MainStack,
+    screen: ModalStack,
     navigationOptions: {
       drawerLabel: 'Home',
       drawerIcon: () => (
