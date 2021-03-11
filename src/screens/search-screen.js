@@ -25,7 +25,7 @@ const PANEL_MID_HEIGHT = 400;
 const initialCurrentFilters = [
   { value: 'Residential for sale', type: FILTER_TYPES.SALE_TYPE },
   { value: { lower: 500000, upper: 1500000 }, description: '$500k - $1.5M', type: FILTER_TYPES.PRICE_RANGE },
-  { value: 'Open home', type: FILTER_TYPES.OPEN_HOME },
+  { value: 'Open home', type: FILTER_TYPES.LISTING_STATUS },
 ];
 
 const recentSearches = [

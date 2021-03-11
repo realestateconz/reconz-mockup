@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, Text, Dimensions, StyleSheet, Image, Platform, StatusBar } from 'react-native';
-import { Icon, Header } from 'react-native-elements';
+import { View, Text, StyleSheet, Image, Platform, StatusBar } from 'react-native';
+import { Icon, Header, Button } from 'react-native-elements';
 import { useNavigation } from 'react-navigation-hooks';
 import { SharedElement } from 'react-navigation-shared-element';
 import { onScrollEvent, useValues } from 'react-native-redash/lib/module/v1';
@@ -8,19 +8,21 @@ import TouchableScale from 'react-native-touchable-scale';
 import Animated, {
   useCode, block, lessThan, cond, set, call, greaterThan, interpolateColors
 } from 'react-native-reanimated';
+import { useDimensions } from '@react-native-community/hooks';
 import { SpringScrollView } from 'react-native-spring-scrollview';
 import ListingSummary from '../components/listing-summary';
-import { AppHeader2Text, TextStyles } from '../components/app-text';
-
+import { AppHeader1Text, AppHeader2Text, TextStyles } from '../components/app-text';
+import Footer from '../components/footer';
 const AnimatedScrollView = Platform.OS === 'ios'
   ? Animated.ScrollView
   : Animated.createAnimatedComponent(SpringScrollView);
-const { width, height } = Dimensions.get('window');
 
-const imageHeight = height * 0.6;
 const PULL_DOWN_TRIGGER_VALUE = 100;
 
 const ListingDetailScreen = (props) => {
+  const { width, height } = useDimensions().window;
+  const imageHeight = height * 0.6;
+
   const { goBack, getParam } = useNavigation();
   const [scrollY, backTriggered, headerOpacity, headerOpacityTriggered] = useValues(0, 0, 0, 0);
   useCode(() =>
@@ -91,6 +93,7 @@ const ListingDetailScreen = (props) => {
           backgroundColor: 'white',
           borderTopRightRadius: 15,
           borderTopLeftRadius: 15,
+          paddingBottom: 100
         }}
       >
         <Animated.View>
@@ -181,6 +184,31 @@ const ListingDetailScreen = (props) => {
               />
             </View>
           }
+        />
+        <Footer
+          leftComponent={(
+            <View style={{ flexDirection: 'row' }}>
+              <Image source={require('../../../assets/images/profile.png')}/>
+              <View style={{ paddingLeft: 10 }}>
+                <AppHeader1Text>John Smith</AppHeader1Text>
+                <AppHeader2Text>Real Estate Agency</AppHeader2Text>
+              </View>
+            </View>
+          )}
+          rightComponent={(
+            <View style={{ flexDirection: 'row', justifyContent:'flex-end' }}>
+              <Button
+                title="Call"
+                style={{ paddingLeft: 20 }}
+                buttonStyle={{ backgroundColor: 'grey' }}
+              />
+              <Button
+                title="Email"
+                style={{ paddingLeft: 20 }}
+                buttonStyle={{ backgroundColor: 'grey' }}
+              />
+            </View>
+          )}
         />
         {/* <SafeAreaView
         pointerEvents="box-none"
