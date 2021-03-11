@@ -22,6 +22,7 @@ Text.defaultProps.style =  { fontFamily: 'Quicksand-Regular' };
 
 Button.defaultProps = Button.defaultProps || {};
 Button.defaultProps.TouchableComponent = TouchableScale;
+Button.defaultProps.titleStyle = { fontFamily: 'Quicksand-Regular' };
 
 const App = () => {
   return (

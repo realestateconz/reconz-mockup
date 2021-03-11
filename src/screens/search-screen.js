@@ -204,6 +204,7 @@ const SearchScreen = () => {
         {isPanelFullScreen(panelHeight) && (
           <Animatable.View
             animation="fadeInUp"
+            useNativeDriver
           >
             <Button
               title="Map view"

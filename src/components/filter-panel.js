@@ -41,7 +41,7 @@ const FilterPanel = ({ filters, onFiltersChange }) => {
                   marginRight: 10
                 }}
                 onPress={() => {
-                  navigate('Modal');
+                  navigate('FilterModal', { filter });
                 }}
               >
                 <AppText>{text}</AppText>
