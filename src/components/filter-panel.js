@@ -10,7 +10,7 @@ import { useNavigation } from 'react-navigation-hooks';
 const filterTypeRightIcons = {
   [FILTER_TYPES.SALE_TYPE]: { name: 'chevron-down', type: 'feather' },
   [FILTER_TYPES.PRICE_RANGE]: { name: 'chevron-down', type: 'feather' },
-  [FILTER_TYPES.OPEN_HOME]: { name: 'close-circle', type: 'material-community' },
+  [FILTER_TYPES.LISTING_STATUS]: { name: 'close-circle', type: 'material-community' },
 };
 
 const FilterPanel = ({ filters, onFiltersChange }) => {
